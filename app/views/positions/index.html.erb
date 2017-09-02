@@ -1,2 +1,9 @@
-<h1>Positions#index</h1>
-<p>Find me in app/views/positions/index.html.erb</p>
+<!-- 個人のみ閲覧可能 -->
+<h3>ポートフォリオ</h3>
+<p>目的に合ったポジションを持ちましょう。</p>
+<%= link_to "ポートフォリオを作成する", new_position_path %>
+<% @positions.each do |position| %>
+  <p>ポートフォリオ：<%= position.name %></p>
+  <%= link_to "ポジション変更", edit_position_path(position.id) %>
+  <%= %>
+<% end %>
