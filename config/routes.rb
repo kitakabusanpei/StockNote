@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
-  resources :positions, only: [:index, :new, :create, :edit]
+
+  resources :positions, only: [:index, :new, :create, :edit, :show, :update, :destroy]
+
+  resources :contacts, only: [:new, :create] do
+    collection do
+      post :confirm
+    end
+  end
+
 
   root 'positions#index'
 

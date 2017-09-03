@@ -1,0 +1,45 @@
+
+<%= form_for(@position) do |f| %>
+  <% if @position.errors.any? %>
+    <div id="error_explanation" >
+      <!-- バリデーションのエラー件数 -->
+      <h2><%= @position.errors.count %>件のエラーがあります。</h2>
+
+      <ul>
+        <% @position.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <br>
+  <%= f.label :lot %>
+  <%= f.number_field :lot %>
+  <br>
+  <%= f.label :buy_price %>
+  <%= f.number_field :buy_price %>
+  <br>
+  <%= f.label :buy_reason %>
+  <%= f.text_field :buy_reason %>
+  <br>
+  <%= f.label :buy_image %>
+  <%= f.file_field :buy_image %>
+  <br>
+  <%= f.label :sell_price %>
+  <%= f.number_field :sell_price %>
+  <br>
+  <%= f.label :sell_percent %>
+  <%= f.number_field :sell_percent %>
+  <br>
+  <%= f.label :high_price_per %>
+  <%= f.number_field :high_price_per %>
+  <br>
+  <%= f.label :sell_reason %>
+  <%= f.text_field :sell_reason%>
+  <br>
+  <%= f.submit %>
+<% end %>
+<%= link_to "戻る", positions_path%>

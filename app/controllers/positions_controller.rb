@@ -1,5 +1,5 @@
 class PositionsController < ApplicationController
-  before_action :set_position, only: [:edit, :update, :destroy]
+  before_action :set_position, only: [:edit, :show, :update, :destroy]
   def index
     @positions = Position.all
   end
@@ -11,7 +11,7 @@ class PositionsController < ApplicationController
   def create
     @position = Position.new(positions_params)
     if @position.save
-      redirect_to positions_path
+      redirect_to positions_path, notice: "ポートフォリオを作成しました。"
     else
       render 'new'
     end
@@ -20,15 +20,20 @@ class PositionsController < ApplicationController
   def edit
   end
 
+  def show
+  end
+
   def update
-    if @positin.update(positions_params)
+    if @position.update(positions_params)
+      redirect_to positions_path, notice: "ポジションを更新しました"
     else
+      render 'edit'
     end
   end
 
   def destroy
     @position.destroy
-    redirect_to root_path
+    redirect_to positions_path, notice: "ポートフォリオを削除しました。"
   end
 
   private

@@ -1,9 +1,12 @@
 <!-- 個人のみ閲覧可能 -->
+<p><%= notice %></p>
 <h3>ポートフォリオ</h3>
-<p>目的に合ったポジションを持ちましょう。</p>
+<p>投資は目的、資産、個人のライフイベントに合った考えでポジションを持ちましょう。</p>
 <%= link_to "ポートフォリオを作成する", new_position_path %>
 <% @positions.each do |position| %>
   <p>ポートフォリオ：<%= position.name %></p>
-  <%= link_to "ポジション変更", edit_position_path(position.id) %>
-  <%= %>
+  <%= link_to "ポジションを変更", edit_position_path(position.id) %>
+  <%= link_to "ポジション確認", position_path(position.id)%>
+  <%= link_to "ポートフォリオを削除", position_path(position.id), method: :delete, data: { confirm: "本当に削除してよろしいですか？" } %>
 <% end %>
+<%= link_to "お問い合わせ", new_contact_path %>
