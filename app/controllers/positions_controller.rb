@@ -1,4 +1,5 @@
 class PositionsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_position, only: [:edit, :show, :update, :destroy]
   def index
     @positions = Position.all

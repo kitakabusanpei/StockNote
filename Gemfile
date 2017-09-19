@@ -44,4 +44,4 @@ group :development, :test do
 end
 
 gem 'twitter-bootstrap-rails'
-gem 'device'
+gem 'devise'
