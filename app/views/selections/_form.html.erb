@@ -1,0 +1,28 @@
+
+<%= form_for(@selection) do |f| %>
+  <% if @selection.errors.any? %>
+    <div id="error_explanation" >
+      <!-- バリデーションのエラー件数 -->
+      <h2><%= @selection.errors.count %>件のエラーがあります。</h2>
+
+      <ul>
+        <% @selection.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <%= f.label "優先順位" %>
+  <%= f.number_field :selection_order %>
+  <br>
+  <%= f.label "選定理由" %>
+  <%= f.text_field :buy_selection %>
+  <br>
+  <%= f.label "購入価格（予定）" %>
+  <%= f.number_field :terget_price %>
+  <br>
+  <%= f.submit %>
+<% end %>
+<%= link_to "戻る", positions_path%>

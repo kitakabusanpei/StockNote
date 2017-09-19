@@ -21,6 +21,7 @@
 
   <tbody>
     <% @positions.each do |position| %>
+    <% if position.user_id == current_user.id%>
       <tr>
         <td><%= "CSVから出力" %></td>
         <td><%= position.lot %>株</td>
@@ -30,6 +31,7 @@
         <td><%= link_to "削除", position_path(position.id), method: :delete, data: { confirm: "本当に削除してよろしいですか？" } %></td>
         <td><%= link_to "詳細確認", position_path(position.id)%></td>
       </tr>
+    <% end %>
     <% end %>
   </tbody>
 </table>

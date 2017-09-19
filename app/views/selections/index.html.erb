@@ -1,0 +1,38 @@
+<!-- 個人のみ閲覧可能 -->
+<div class="container">
+  <div class="row">
+    <div class="col">
+<p><%= notice %></p>
+<h3>購入候補株</h3>
+
+<%= link_to "候補を記録する", new_selection_path %>
+<p>現在の候補一覧</p>
+<table>
+  <thead>
+    <tr>
+      <th>順位</th>
+      <th>銘柄</th>
+      <th>目標購入価格</th>
+      <th>選定理由</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @selections.each do |selection| %>
+    <% if selection.user_id == current_user.id %>
+      <tr>
+        <td><%= selection.selection_order %></td>
+        <td><%= "CSVから出力" %></td>
+        <td><%= selection.terget_price %>円</td>
+        <td><%= selection.buy_selection %></td>
+        <td><%= link_to "変更", edit_selection_path(selection.id) %></td>
+        <td><%= link_to "削除", selection_path(selection.id), method: :delete, data: { confirm: "本当に削除してよろしいですか？" } %></td>
+      </tr>
+    <% end %>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+</div>

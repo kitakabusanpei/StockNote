@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+
   devise_for :users
   resources :positions, only: [:index, :new, :create, :edit, :show, :update, :destroy]
-
+  resources :selections, only: [:index, :new, :create, :edit, :update, :destroy]
+  
   resources :contacts, only: [:new, :create] do
     collection do
       post :confirm
