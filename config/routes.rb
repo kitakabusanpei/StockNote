@@ -3,13 +3,17 @@ Rails.application.routes.draw do
   devise_for :users
   resources :positions, only: [:index, :new, :create, :edit, :show, :update, :destroy]
   resources :selections, only: [:index, :new, :create, :edit, :update, :destroy]
-  
+
   resources :contacts, only: [:new, :create] do
     collection do
       post :confirm
     end
   end
 
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
+  
   root 'top#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
