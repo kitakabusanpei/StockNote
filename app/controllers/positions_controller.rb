@@ -11,6 +11,7 @@ class PositionsController < ApplicationController
 
   def create
     @position = Position.new(positions_params)
+    @position.user_id = current_user.id
     if @position.save
       redirect_to positions_path, notice: "ポートフォリオを作成しました。"
     else
