@@ -13,31 +13,31 @@
     </div>
   <% end %>
 
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+  <!-- <%= f.label :name %>
+  <%= f.text_field :name %> -->
   <br>
-  <%= f.label :lot %>
+  <%= f.label "株数" %>
   <%= f.number_field :lot %>
   <br>
-  <%= f.label :buy_price %>
+  <%= f.label "購入価格" %>
   <%= f.number_field :buy_price %>
   <br>
-  <%= f.label :buy_reason %>
+  <%= f.label "購入理由" %>
   <%= f.text_field :buy_reason %>
   <br>
-  <%= f.label :buy_image %>
+  <%= f.label "購入理由（画像）" %>
   <%= f.file_field :buy_image %>
   <br>
-  <%= f.label :sell_price %>
+  <%= f.label "売却価格（予定）" %>
   <%= f.number_field :sell_price %>
   <br>
-  <%= f.label :sell_percent %>
+  <%= f.label "売却（比率売却）" %>
   <%= f.number_field :sell_percent %>
   <br>
-  <%= f.label :high_price_per %>
+  <%= f.label "（購入後の）最高値後からの騰落％" %>
   <%= f.number_field :high_price_per %>
   <br>
-  <%= f.label :sell_reason %>
+  <%= f.label "売却理由" %>
   <%= f.text_field :sell_reason%>
   <br>
   <%= f.submit %>

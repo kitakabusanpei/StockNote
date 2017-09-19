@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   resources :positions, only: [:index, :new, :create, :edit, :show, :update, :destroy]
 
   resources :contacts, only: [:new, :create] do
@@ -8,8 +7,7 @@ Rails.application.routes.draw do
     end
   end
 
-
-  root 'positions#index'
+  root 'top#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

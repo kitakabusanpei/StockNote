@@ -1,3 +1,7 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+
 <%= form_for(@contact, url: confirm_contacts_path) do |f| %>
   <% if @contact.errors.any? %>
     <div id="error_explanation" >
@@ -24,3 +28,7 @@
   <%= f.submit %>
 <% end %>
 <%= link_to "戻る", root_path %>
+
+</div>
+</div>
+</div>
