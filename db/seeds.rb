@@ -6,9 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-require "csv"
-
-CSV.foreach('db/stacks.csv', headers: true) do |row|
-  # モデル名を
-  Company.create(:code => row[0], :name => row[1], :price_day => [2], :height_price_day => [3])
-end
+# require "csv"
+#
+# CSV.foreach('db/stacks.csv', headers: true) do |row|
+#   # モデル名を
+#   Company.create(:code => row[0], :name => row[1], :price_day => [2], :height_price_day => [3])
+# end

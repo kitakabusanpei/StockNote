@@ -47,3 +47,8 @@ class PositionsController < ApplicationController
     @position = Position.find(params[:id])
   end
 end
+
+# 例外処理
+# raise
+# 強制停止
+# binding.pry
