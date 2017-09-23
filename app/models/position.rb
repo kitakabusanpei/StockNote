@@ -3,4 +3,5 @@ class Position < ActiveRecord::Base
   # validates :buy_reason, :sell_reason, length: { in: 1..240 }
 
   belongs_to :user
+  belongs_to :stack
 end

@@ -3,10 +3,12 @@ class SelectionsController < ApplicationController
   before_action :set_selection, only: [:edit, :update, :destroy]
   def index
     @selections = Selection.all
+
   end
 
   def new
     @selection = Selection.new
+    @stacks = Stack.all
   end
 
   def create

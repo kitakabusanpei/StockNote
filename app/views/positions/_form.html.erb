@@ -12,9 +12,10 @@
       </ul>
     </div>
   <% end %>
+<!-- f.select(form_for文でのセレクトボックスを使用) :name(保存するカラム),
+    Stack.all.map表示させるデータ{[ 表示させる項目, 保存する内容]}(空白を間に入れたいので "#{} #{}" にしている) -->
+  <%= f.select :name, Stack.all.map{|t| ["#{t.code} #{t.company}", "#{t.code} #{t.company}"]} %>
 
-  <!-- <%= f.label :name %>
-  <%= f.text_field :name %> -->
   <br>
   <%= f.label "株数" %>
   <%= f.number_field :lot %>

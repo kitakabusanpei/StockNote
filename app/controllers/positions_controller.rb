@@ -7,6 +7,7 @@ class PositionsController < ApplicationController
 
   def new
     @position = Position.new
+    @stacks = Stack.all
   end
 
   def create

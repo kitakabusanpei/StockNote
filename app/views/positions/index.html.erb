@@ -23,7 +23,7 @@
     <% @positions.each do |position| %>
     <% if position.user_id == current_user.id%>
       <tr>
-        <td><%= "" %></td><!-- CSVから出力 -->
+        <td><%= position.name %></td>
         <td><%= position.lot %>株</td>
         <td><%= position.buy_price %>円</td>
         <td><%=%>　損益<%=%>円</td>
@@ -35,6 +35,7 @@
     <% end %>
   </tbody>
 </table>
+
 </div>
 </div>
 </div>
