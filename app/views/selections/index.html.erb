@@ -11,6 +11,7 @@
   <thead>
     <tr>
       <th>順位</th>
+      <th>証券コード</th>
       <th>銘柄</th>
       <th>目標購入価格</th>
       <th>選定理由</th>
@@ -23,7 +24,8 @@
     <% if selection.user_id == current_user.id %>
       <tr>
         <td><%= selection.selection_order %></td>
-        <td><%= "CSVから出力" %></td>
+        <td><%= selection.selection_code(selection.name) %></td>
+        <td><%= selection.selection_company(selection.name) %></td>
         <td><%= selection.terget_price %>円</td>
         <td><%= selection.buy_selection %></td>
         <td><%= link_to "変更", edit_selection_path(selection.id) %></td>
