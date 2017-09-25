@@ -17,6 +17,8 @@
   <%= f.label "優先順位" %>
   <%= f.number_field :selection_order %>
   <br>
+  <%= f.select :name, Stack.all.map{|t| ["#{t.code} #{t.company}", "#{t.code} #{t.company}"]} %>
+  <br>
   <%= f.label "選定理由" %>
   <%= f.text_field :buy_selection %>
   <br>
@@ -25,4 +27,4 @@
   <br>
   <%= f.submit %>
 <% end %>
-<%= link_to "戻る", positions_path%>
+<%= link_to "戻る", selections_path%>

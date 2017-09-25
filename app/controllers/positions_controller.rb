@@ -3,11 +3,11 @@ class PositionsController < ApplicationController
   before_action :set_position, only: [:edit, :show, :update, :destroy]
   def index
     @positions = Position.all
+    @stacks = Stack.all
   end
 
   def new
     @position = Position.new
-    @stacks = Stack.all
   end
 
   def create

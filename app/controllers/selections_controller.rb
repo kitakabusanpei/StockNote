@@ -2,13 +2,12 @@ class SelectionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_selection, only: [:edit, :update, :destroy]
   def index
-    @selections = Selection.all
-
+    @selections = Selection.all.order(:selection_order)
+    @stacks = Stack.all
   end
 
   def new
     @selection = Selection.new
-    @stacks = Stack.all
   end
 
   def create
@@ -39,7 +38,7 @@ class SelectionsController < ApplicationController
 
   private
   def selection_params
-    params.require(:selection).permit(:selection_order, :buy_selection, :terget_price)
+    params.require(:selection).permit(:selection_order, :buy_selection, :terget_price, :name)
   end
 
   def set_selection

@@ -28,8 +28,12 @@
         <td><%= position.position_company(position.name) %></td>
         <td><%= position.lot %>株</td>
         <td><%= position.buy_price %>円</td>
-        <td><%= position.stack_price(position.name) %>円</td>
-        <td><%= %>円</td>
+        <% @stacks.each do |stack| %>
+          <% if stack.code == position.position_code(position.name).to_i %>
+            <td><%= stack.stock_price %>円</td>
+            <td><%= (stack.stock_price - position.buy_price) * position.lot %>円</td>
+          <% end %>
+        <% end %>
         <td><%= link_to "変更", edit_position_path(position.id) %></td>
         <td><%= link_to "削除", position_path(position.id), method: :delete, data: { confirm: "本当に削除してよろしいですか？" } %></td>
         <td><%= link_to "詳細確認", position_path(position.id)%></td>
@@ -38,7 +42,6 @@
     <% end %>
   </tbody>
 </table>
-
 </div>
 </div>
 </div>

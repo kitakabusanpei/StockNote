@@ -14,7 +14,7 @@
   <% end %>
 <!-- f.select(form_for文でのセレクトボックスを使用) :name(保存するカラム),
     Stack.all.map表示させるデータ{[ 表示させる項目, 保存する内容]}(空白を間に入れたいので "#{} #{}" にしている) -->
-  <%= f.select :name, Stack.all.map{|t| ["#{t.code} #{t.company}", "#{t.code} #{t.company}"]} %>
+  <%= f.select :name, Stack.all.map{|t| ["#{t.code} #{t.company}", "#{t.code}#{t.company}"]} %>
 
   <br>
   <%= f.label "株数" %>
@@ -25,9 +25,9 @@
   <br>
   <%= f.label "購入理由" %>
   <%= f.text_field :buy_reason %>
-  <br>
+  <!-- <br>
   <%= f.label "購入理由（画像）" %>
-  <%= f.file_field :buy_image %>
+  <%= f.file_field :buy_image %> -->
   <br>
   <%= f.label "売却価格（予定）" %>
   <%= f.number_field :sell_price %>

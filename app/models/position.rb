@@ -12,16 +12,7 @@ class Position < ActiveRecord::Base
 
   # 会社名を表示
   def position_company(stack_company)
-    stack_company.slice(5..-1)
+    stack_company.slice(4..14)
   end
 
-  # 株価を表示
-  def stack_price(stack_price)
-    Stack.code.each do |stack|
-      if position_code(stack_price) = stack
-        Stack.stack_price
-      end
-    end
-  end
-  
 end

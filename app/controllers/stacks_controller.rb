@@ -1,5 +1,5 @@
 class StacksController < ApplicationController
   def index
-    @stack = Stack.all
+    # @stacks = Stack.all
   end
 end
