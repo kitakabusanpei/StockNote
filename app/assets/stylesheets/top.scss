@@ -2,13 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-body {
-  height: 100px;
-}
 
 header {
   height: 90px;
+}
 
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  // text-align: center;
 }
 
 footer {
@@ -17,11 +22,6 @@ footer {
   padding:20px 0 10px 0;
   position: absolute;
   bottom: 0;
-}
-
-html {
-  min-height: 100%;
-  position: relative;
 }
 
 li {

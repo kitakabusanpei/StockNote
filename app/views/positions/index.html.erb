@@ -7,7 +7,7 @@
 
 <%= link_to "新規の株式取引を記録をする", new_position_path %>
 <p>現在のポジション一覧</p>
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>証券コード</th>
@@ -42,6 +42,42 @@
     <% end %>
   </tbody>
 </table>
+
+<h3>保有株の比率（金額）</h3>
+
+<!-- あとでcssに記述 -->
+<div class="pie_chrat">
+<!-- ここに円グラフを表示 -->
+<canvas id="myPieChart"></canvas>
+</div>
+
+<%= javascript_tag do %>
+  (window.onload = function(){
+    var ctx = document.getElementById("myPieChart").getContext("2d");
+    window.pieData = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: pieLabels,
+        datasets: [{
+          backgroundColor: pieColors,
+          data: date
+        }]
+      }
+    });
+  })();
+
+  var pieLabels = [
+      <% @positions.each do |position| %>
+      '<%= "#{position.position_company(position.name)}" %>',
+      <% end %>
+      ];
+  var pieColors = ['gray','red','yellow','blue','lime','green','aqua','purple','navy','teal','fuchsia','maroon'];
+  var date = [
+    <% @positions.each do |position| %>
+    <%= "#{position.buy_price * position.lot}," %>
+    <% end %>
+  ];
+<% end %>
 </div>
 </div>
 </div>
