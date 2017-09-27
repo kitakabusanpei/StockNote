@@ -1,43 +1,64 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="container">
+  <div class="wrapper col-md-4 col-md-offset-4 col-sm-10">
+    <div class="line_header">
+    <h2>マイページ</h2>
+</div>
+    <%= alert %>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.email_field :email, autofocus: true, class: "form-control" %>
   </div>
 
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <% if @user.provider.blank? %>
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
 
   <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+    <%= f.label :password %><br />
     <%= f.password_field :password, autocomplete: "off" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
+    <p class="help-block">※変更しない場合は、空白にしてください。</p>
+    <p class="help-block"> 変更する場合は、６文字以上で入力してください。</p>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
   </div>
 
   <div class="field">
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
+    <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
+    <p class="help-block">※変更確認のため、現在のパスワードを入力してください。</p>
   </div>
 
+  <% end %>
+
+  <div class="field">
+    <%= profile_img(@user) if profile_img(@user) %>
+    <%= f.file_field :avatar %>
+    <%= f.hidden_field :avatar_cache %>
+  </div>
+
+
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= f.submit "更新", class: "btn btn-primary btn-block" %>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
+  <h3>アカウントの削除</h3>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<p>アカウントを削除しますがよろしいですか? <%= button_to "アカウントの削除", registration_path(resource_name), class: "btn btn-danger btn-sm", data: { confirm: "アカウントを削除してしまいますがよろしいですか?" }, method: :delete %></p>
 
-<%= link_to "Back", :back %>
+<%= link_to "Back", :back, class: 'btn btn-default back_btn' %>
+</div>
+</div>
