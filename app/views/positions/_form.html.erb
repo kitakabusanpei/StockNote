@@ -1,91 +1,81 @@
 <div class="thumbnail">
-<%= form_for(@position) do |f| %>
-  <% if @position.errors.any? %>
-    <div id="error_explanation" >
-      <!-- バリデーションのエラー件数 -->
-      <h2><%= @position.errors.count %>件のエラーがあります。</h2>
+  <%= form_for(@position) do |f| %>
+    <% if @position.errors.any? %>
+      <div id="error_explanation" >
+        <!-- バリデーションのエラー件数 -->
+        <h2><%= @position.errors.count %>件のエラーがあります。</h2>
 
-      <ul>
-        <% @position.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% @position.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="form-horizontal">
+      <div class="form-group">
+        <%= f.label "銘柄", class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.select :name, Stack.all.map{|t| ["#{t.code} #{t.company}", "#{t.code}#{t.company}"]},{},{class: "form-control"} %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label "株数", class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.number_field :lot, min: "1", class: " form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label "購入価格", class: "col-sm-4 control-label"  %>
+        <div class="col-sm-8">
+          <%= f.number_field :buy_price, min: "1", class: " form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label "購入理由", class: "col-sm-4 control-label"  %>
+        <div class="col-sm-8">
+          <%= f.text_field :buy_reason, class: " form-control" %>
+        </div>
+      </div>
+      <!-- <div class="form-group"> -->
+        <!-- <%= f.label "購入理由（画像）", class: "col-sm-4 control-label"  %> -->
+        <!-- <div class="col-sm-8"> -->
+          <!-- <%= f.file_field :buy_image, class: " form-control" %> -->
+        <!-- </div> -->
+      <!-- </div> -->
+      <div class="center_line">
+        <h4>売り基準</h4>
+      </div>
+      <div class="form-group">
+        <%= f.label "売却価格（予定）", class: "col-sm-4 control-label"  %>
+        <div class="col-sm-8">
+          <%= f.number_field :sell_price, min: "1", class: " form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label "比率売却価格（％）", class: "col-sm-4 control-label"  %>
+        <div class="col-sm-8">
+          <%= f.number_field :sell_percent, min: "1", class: " form-control" %>
+        </div>
+      </div>
+      <!-- <div class="form-group"> -->
+        <!-- <%= f.label "（購入後の）最高値後からの騰落率（％）", class: "col-sm-4 control-label"  %> -->
+        <!-- <div class="col-sm-8"> -->
+          <!-- <%= f.number_field :high_price_per, min: "1", max: "99", class: " form-control" %> -->
+        <!-- </div> -->
+      <!-- </div> -->
+      <div class="form-group">
+        <%= f.label "売却理由", class: "col-sm-4 control-label"  %>
+        <div class="col-sm-8">
+          <%= f.text_field :sell_reason, class: " form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+          <%= f.submit "保存", class: "btn btn-primary"  %>
+        </div>
+      </div>
     </div>
   <% end %>
-  <div class="form-horizontal">
-
-<div class="form-group">
-  <%= f.label "銘柄", class: "col-sm-4 control-label"  %>
-<!-- f.select(form_for文でのセレクトボックスを使用) :name(保存するカラム), -->
-    <!-- Stack.all.map表示させるデータ{[ 表示させる項目, 保存する内容]}(空白を間に入れたいので "#{} #{}" にしている) -->
-      <div class="col-sm-8">
-  <%= f.select :name, Stack.all.map{|t| ["#{t.code} #{t.company}", "#{t.code}#{t.company}"]} %>
-</div>
-</div>
-
-<div class="form-group">
-  <%= f.label "株数", class: "col-sm-4 control-label" %>
-  <div class="col-sm-8">
-  <%= f.number_field :lot, class: " form-control" %>
-</div>
-</div>
-
-<div class="form-group">
-  <%= f.label "購入価格", class: "col-sm-4 control-label"  %>
-    <div class="col-sm-8">
-  <%= f.number_field :buy_price, class: " form-control" %>
-</div>
-</div>
-
-
-<div class="form-group">
-  <%= f.label "購入理由", class: "col-sm-4 control-label"  %>
-      <div class="col-sm-8">
-  <%= f.text_field :buy_reason, class: " form-control" %>
-</div>
-</div>
-
-<!-- <div class="form-group"> -->
-  <!-- <%= f.label "購入理由（画像）", class: "col-sm-4 control-label"  %> -->
-      <!-- <div class="col-sm-8"> -->
-  <!-- <%= f.file_field :buy_image, class: " form-control" %> -->
-<!-- </div> -->
-<!-- </div> -->
-
-<div class="form-group">
-  <%= f.label "売却価格（予定）", class: "col-sm-4 control-label"  %>
-      <div class="col-sm-8">
-  <%= f.number_field :sell_price, class: " form-control" %>
-</div>
-</div>
-
-<div class="form-group">
-  <%= f.label "売却（比率売却）", class: "col-sm-4 control-label"  %>
-      <div class="col-sm-8">
-  <%= f.number_field :sell_percent, class: " form-control" %>
-</div>
-</div>
-
-<div class="form-group">
-  <%= f.label "（購入後の）最高値後からの騰落％", class: "col-sm-4 control-label"  %>
-      <div class="col-sm-8">
-  <%= f.number_field :high_price_per, class: " form-control" %>
-</div>
-</div>
-
-<div class="form-group">
-  <%= f.label "売却理由", class: "col-sm-4 control-label"  %>
-      <div class="col-sm-8">
-  <%= f.text_field :sell_reason, class: " form-control" %>
-</div>
-</div>
-
-<div class="form-group">
-  <div class="col-sm-offset-4 col-sm-8">
-  <%= f.submit "保存", class: "btn btn-primary"  %>
-<% end %>
-<%= link_to "戻る", positions_path, class: "btn btn-default" %>
-</div>
-</div>
-</div>
+  <%= link_to "戻る", positions_path, class: "btn btn-default" %>
 </div>

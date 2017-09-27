@@ -1,19 +1,79 @@
 <div class="container">
   <div class="row">
-    <div class="col">
-  <div class="noline_header">
-<h3>さんのポートフォリオ</h3>
-</div>
-<p><%= @position.lot %>株</p>
-<p><%= @position.buy_price %>円</p>
-<p>取引理由：<%= @position.buy_reason %></p>
-<!-- <p>取引理由（画像）：<%= @position.buy_image %></p> -->
-<p>売却価格（予定）<%= @position.sell_price %></p>
-<p>売却（比率売却）<%= @position.sell_percent %></p>
-<p>（購入後の）最高値後からの騰落％<%= @position.high_price_per %></p>
-<p>売却理由<%= @position.sell_reason %></p>
-
-<p><%= link_to "戻る", positions_path %>
-</div>
-</div>
+    <div class="col-xs-offset-1 col-xs-10">
+      <div class="noline_header">
+        <% @users.each do |user| %>
+          <% if user.id == current_user.id %>
+            <h3><%= user.name %>さんのポートフォリオ</h3>
+            <% break %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="form-horizontal">
+        <div class="form-group">
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th colspan="4">証券コード<br>
+                    <%= @position.name %>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center">保有株数</td>
+                  <td class="text-center">買付け価格</td>
+                  <td class="text-center">株価（前日）</td>
+                  <td class="text-center">損益評価</td>
+                </tr>
+                <tr>
+                  <td class="text-center"><%= @position.lot %>株</td>
+                  <td class="text-center"><%= @position.buy_price %>円</td>
+                  <% @stacks.each do |stack| %>
+                    <% if stack.code == position.position_code(position.name).to_i %>
+                    <td class="text-center"><%= stack.stock_price %>円</td>
+                    <td class="text-center"><%= (stack.stock_price - position.buy_price) * position.lot %>円</td>
+                  <% end %>
+                <% end %>
+                </tr>
+                <tr>
+                  <td colspan="4">取引理由<br>
+                  <%= @position.buy_reason %>
+                  </td>
+                </tr>
+                <!-- <p>取引理由（画像）：<%= @position.buy_image %></p> -->
+                <tr>
+                  <td class="text-center">目標売却価格</td>
+                  <td class="text-center">売却差分</td>
+                  <td class="text-center">目標比率（％）</td>
+                  <td class="text-center">比率売却差分</td>
+                  <!-- <td>（購入後の）最高値後からの騰落％<%= @position.high_price_per %></td> -->
+                </tr>
+                <tr>
+                  <% @stacks.each do |stack| %>
+                    <% if stack.code == position.position_code(position.name).to_i %>
+                  <td class="text-center"><%= @position.sell_price %>円</td>
+                  <td class="text-center"><%= stack.stock_price - @position.sell_price %>円</td>
+                  <td class="text-center"><%= @position.sell_percent %>％</td>
+                  <td class="text-center"><%= stack.stock_price  - (@position.buy_price +(@position.buy_price * (@position.sell_percent / 100))) %>円</td>
+                  <% end %>
+                <% end %>
+              </tr>
+              <tr>
+                <td colspan="4">売却理由<br>
+                  <%= @position.sell_reason %>
+                </td>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-offset-1 col-xs-10">
+      <p><%= link_to "戻る", positions_path, class: "btn btn-default" %></p>
+    </div>
+  </div>
 </div>

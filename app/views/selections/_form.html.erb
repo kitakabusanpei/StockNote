@@ -1,30 +1,49 @@
+<div class="thumbnail">
+  <%= form_for(@selection) do |f| %>
+    <% if @selection.errors.any? %>
+      <div id="error_explanation" >
+        <!-- バリデーションのエラー件数 -->
+        <h2><%= @selection.errors.count %>件のエラーがあります。</h2>
 
-<%= form_for(@selection) do |f| %>
-  <% if @selection.errors.any? %>
-    <div id="error_explanation" >
-      <!-- バリデーションのエラー件数 -->
-      <h2><%= @selection.errors.count %>件のエラーがあります。</h2>
+        <ul>
+          <% @selection.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-      <ul>
-        <% @selection.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+    <div class="form-horizontal">
+      <div class="form-group">
+        <%= f.label "優先順位", class: "col-sm-4 control-label"  %>
+        <div class="col-sm-8">
+          <%= f.number_field :selection_order %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label "銘柄", class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.select :name, Stack.all.map{|t| ["#{t.code} #{t.company}", "#{t.code} #{t.company}"]},{},{class: "form-control"} %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label "選定理由", class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.text_field :buy_selection %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label "購入価格（予定）", class: "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.number_field :terget_price %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+          <%= f.submit "保存", class: "btn btn-primary" %>
+        </div>
+      </div>
     </div>
   <% end %>
-
-
-  <%= f.label "優先順位" %>
-  <%= f.number_field :selection_order %>
-  <br>
-  <%= f.select :name, Stack.all.map{|t| ["#{t.code} #{t.company}", "#{t.code} #{t.company}"]} %>
-  <br>
-  <%= f.label "選定理由" %>
-  <%= f.text_field :buy_selection %>
-  <br>
-  <%= f.label "購入価格（予定）" %>
-  <%= f.number_field :terget_price %>
-  <br>
-  <%= f.submit %>
-<% end %>
-<%= link_to "戻る", selections_path%>
+  <%= link_to "戻る", selections_path, class: "btn btn-default" %>
+</div>
