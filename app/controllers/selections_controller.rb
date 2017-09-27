@@ -4,6 +4,7 @@ class SelectionsController < ApplicationController
   def index
     @selections = Selection.all.order(:selection_order)
     @stacks = Stack.all
+    @users = User.all
   end
 
   def new

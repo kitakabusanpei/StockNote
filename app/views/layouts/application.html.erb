@@ -19,8 +19,8 @@
     </div>
     <nav>
       <ul class="top_list">
+        <li><%= link_to "トップページ", root_path %></li>
         <% if user_signed_in? %>
-          <li><%= link_to "トップページ", root_path %></li>
           <li><%= link_to "ポートフォリオ", positions_path %></li>
           <li><%= link_to "投資候補一覧", selections_path %></li>
           <li><%= link_to "マイページ", edit_user_registration_path %></li>
@@ -33,9 +33,9 @@
       </ul>
     </nav>
   </header>
-
+<div class="main_content">
 <%= yield %>
-
+</div>
   <footer>
     <div class=footer>
     <p>2017-2017 StockNote</p>

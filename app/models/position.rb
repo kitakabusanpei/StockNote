@@ -23,7 +23,7 @@ class Position < ActiveRecord::Base
      if count == 12
        i = 0
      end
-     color[i]
+     print "#{color[i]},"
      i+=1
      color+=1
    end

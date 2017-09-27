@@ -2,13 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.position_table {
+  background-color: white;
+}
+
 .pie_chart {
-  width: 100px;
+  width: 50px;
   background-color: white;
   padding: 10px;
   border: 1px solid #ccc;
-}
-
-.canvas {
-  width: 20%;
 }

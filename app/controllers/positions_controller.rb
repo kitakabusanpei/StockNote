@@ -4,6 +4,7 @@ class PositionsController < ApplicationController
   def index
     @positions = Position.all
     @stacks = Stack.all
+    @users = User.all
   end
 
   def new
