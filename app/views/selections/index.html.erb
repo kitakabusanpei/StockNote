@@ -4,38 +4,52 @@
     <div class="col">
       <p><%= notice %></p>
       <div class="noline_header">
-        <h3>購入候補株</h3>
+        <h3>投資候補先の一覧</h3>
       </div>
       <div class="thumbnail position_table">
         <p><%= link_to "候補を記録する", new_selection_path, class: "btn btn-primary position_add" %></p>
-        <p>現在の候補一覧</p>
+        <p>現在の候補</p>
         <div class="table-responsive">
-          <table class="table table-hover">
+          <table class="table">
             <thead>
               <tr>
-                <th class="text-center">順位</th>
+                <th scope="row"></th>
+                <th class="text-center">候補順位</th>
                 <th class="text-center">証券コード</th>
                 <th class="text-center">銘柄</th>
                 <th class="text-center">購入株価</th>
-                <th class="text-center">選定理由</th>
-                <th class="text-center" colspan="2"></th>
+                <th class="text-center">株価(前日)</th>
               </tr>
             </thead>
-            <tbody>
               <% @selections.each do |selection| %>
               <% if selection.user_id == current_user.id %>
+              <tbody>
                 <tr>
+                  <th scope="row"></th>
                   <td class="text-center"><%= selection.selection_order %></td>
                   <td class="text-center"><%= selection.selection_code(selection.name) %></td>
                   <td class="text-center"><%= selection.selection_company(selection.name) %></td>
                   <td class="text-center"><%= selection.terget_price %>円</td>
-                  <td class="text-center"><%= selection.buy_selection %></td>
-                  <td class="text-center"><%= link_to "変更", edit_selection_path(selection.id), class: "btn btn-success btn-sm" %></td>
-                  <td class="text-center"><%= link_to "削除", selection_path(selection.id), class: "btn btn-danger btn-sm", method: :delete, data: { confirm: "本当に削除してよろしいですか？" } %></td>
+                  <% @stacks.each do |stack| %>
+                    <% if stack.code == selection.selection_code(selection.name).to_i %>
+                      <td class="text-center"><%= stack.stock_price %>円</td>
+                    <% end %>
+                  <% end %>
                 </tr>
+                <tr>
+                  <th scope="row">選定理由</th>
+                  <td colspan="5"><%= selection.buy_selection %></td>
+                </tr>
+                <tr>
+                  <th scope="row"></th>
+                  <td colspan="4"></td>
+                  <td class="text-center"><%= link_to "変更", edit_selection_path(selection.id), class: "btn btn-success btn-sm" %>
+                    <%= link_to "削除", selection_path(selection.id), class: "btn btn-danger btn-sm", method: :delete, data: { confirm: "本当に削除してよろしいですか？" } %></td>
+                </tr>
+              </tbody>
               <% end %>
               <% end %>
-            </tbody>
+
           </table>
         </div>
       </div>

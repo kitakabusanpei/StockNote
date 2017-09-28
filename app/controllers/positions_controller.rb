@@ -25,7 +25,8 @@ class PositionsController < ApplicationController
   end
 
   def show
-    @users = User.all
+    @stacks = Stack.all
+    @positions = Position.all
   end
 
   def update

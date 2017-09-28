@@ -15,7 +15,7 @@ class SelectionsController < ApplicationController
     @selection = Selection.new(selection_params)
     @selection.user_id = current_user.id
     if @selection.save
-      redirect_to selections_path, notice: "候補バスケットを作成しました。"
+      redirect_to selections_path, notice: "投資候補を作成しました。"
     else
       render 'new'
     end
@@ -26,7 +26,7 @@ class SelectionsController < ApplicationController
 
   def update
     if @selection.update(selection_params)
-      redirect_to selections_path, notice: "候補バスケットを更新しました。"
+      redirect_to selections_path, notice: "投資候補を更新しました。"
     else
       render 'edit'
     end
@@ -34,7 +34,7 @@ class SelectionsController < ApplicationController
 
   def destroy
     @selection.destroy
-    redirect_to selections_path, notice: "候補バスケットを削除しました。"
+    redirect_to selections_path, notice: "投資候補を削除しました。"
   end
 
   private

@@ -4,7 +4,7 @@
 
 
 header {
-  height: 100px;
+  height: 88px;
 }
 
 body {
@@ -92,3 +92,28 @@ li {
 .pie_chart{
   margin-bottom: 20px;
 }
+
+.flash {
+ color: white;
+ padding-top: 10px;
+ margin: 0px;
+}
+
+.main-header {
+ padding-bottom: 15%;
+ width: 100%;
+ background-size: cover;
+ background-image: image-url("header01.jpg");
+ background-attachment: fixed;
+}
+
+.main-header img {
+ display: block;
+ margin: 0 auto;
+ width: 25%;
+ padding-top: 15%;
+}
+
+// .area_padding{
+//   margin: 10px;
+// }

@@ -2,12 +2,7 @@
   <div class="row">
     <div class="col-xs-offset-1 col-xs-10">
       <div class="noline_header">
-        <% @users.each do |user| %>
-          <% if user.id == current_user.id %>
-            <h3><%= user.name %>さんのポートフォリオ</h3>
-            <% break %>
-          <% end %>
-        <% end %>
+        <h3>個別銘柄の詳細設定</h3>
       </div>
       <div class="form-horizontal">
         <div class="form-group">
@@ -15,7 +10,7 @@
             <table class="table table-bordered">
               <thead>
                 <tr>
-                  <th colspan="4">証券コード<br>
+                  <th colspan="4">証券コード、銘柄名<br>
                     <%= @position.name %>
                   </th>
                 </tr>
@@ -31,9 +26,9 @@
                   <td class="text-center"><%= @position.lot %>株</td>
                   <td class="text-center"><%= @position.buy_price %>円</td>
                   <% @stacks.each do |stack| %>
-                    <% if stack.code == position.position_code(position.name).to_i %>
+                    <% if stack.code == @position.position_code(@position.name).to_i %>
                     <td class="text-center"><%= stack.stock_price %>円</td>
-                    <td class="text-center"><%= (stack.stock_price - position.buy_price) * position.lot %>円</td>
+                    <td class="text-center"><%= (stack.stock_price - @position.buy_price) * @position.lot %>円</td>
                   <% end %>
                 <% end %>
                 </tr>
@@ -45,18 +40,18 @@
                 <!-- <p>取引理由（画像）：<%= @position.buy_image %></p> -->
                 <tr>
                   <td class="text-center">目標売却価格</td>
-                  <td class="text-center">売却差分</td>
-                  <td class="text-center">目標比率（％）</td>
+                  <td class="text-center">目標売却差分</td>
+                  <td class="text-center">目標上昇比率（％）</td>
                   <td class="text-center">比率売却差分</td>
                   <!-- <td>（購入後の）最高値後からの騰落％<%= @position.high_price_per %></td> -->
                 </tr>
                 <tr>
                   <% @stacks.each do |stack| %>
-                    <% if stack.code == position.position_code(position.name).to_i %>
+                    <% if stack.code == @position.position_code(@position.name).to_i %>
                   <td class="text-center"><%= @position.sell_price %>円</td>
                   <td class="text-center"><%= stack.stock_price - @position.sell_price %>円</td>
-                  <td class="text-center"><%= @position.sell_percent %>％</td>
-                  <td class="text-center"><%= stack.stock_price  - (@position.buy_price +(@position.buy_price * (@position.sell_percent / 100))) %>円</td>
+                  <td class="text-center"><%= @position.sell_percent %>％（<%= (@position.buy_price * ((100 + @position.sell_percent.round(2)) / 100)).to_i %>円）</td>
+                  <td class="text-center"><%= stack.stock_price - (@position.buy_price * ((100 + @position.sell_percent.round(2)) / 100)).to_i %>円</td>
                   <% end %>
                 <% end %>
               </tr>

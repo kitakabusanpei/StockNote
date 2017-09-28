@@ -1,4 +1,6 @@
 class Selection < ActiveRecord::Base
+  validates :buy_selection, presence: true
+
   belongs_to :user
   belongs_to :stack
 
