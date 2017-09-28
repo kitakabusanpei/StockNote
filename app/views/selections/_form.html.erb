@@ -17,7 +17,7 @@
       <div class="form-group">
         <%= f.label "優先順位", class: "col-sm-4 control-label" %>
         <div class="col-sm-8">
-          <%= f.number_field :selection_order, min: "1", class: " form-control" %>
+          <%= f.number_field :selection_order, min: "1", class: "form-control", placeholder: "selection_order" %>
         </div>
       </div>
       <div class="form-group">
@@ -29,13 +29,13 @@
       <div class="form-group">
         <%= f.label "選定理由", class: "col-sm-4 control-label" %>
         <div class="col-sm-8">
-          <%= f.text_field :buy_selection, class: " form-control" %>
+          <%= f.text_field :buy_selection, class: "form-control", placeholder: "buy_selection" %>
         </div>
       </div>
       <div class="form-group">
         <%= f.label "購入価格（予定）", class: "col-sm-4 control-label" %>
         <div class="col-sm-8">
-          <%= f.number_field :terget_price, min: "1", class: " form-control" %>
+          <%= f.number_field :terget_price, min: "1", class: "form-control", placeholder: "terget_price" %>
         </div>
       </div>
       <div class="form-group">

@@ -22,19 +22,19 @@
       <div class="form-group">
         <%= f.label "株数", class: "col-sm-4 control-label" %>
         <div class="col-sm-8">
-          <%= f.number_field :lot, min: "1", class: " form-control" %>
+          <%= f.number_field :lot, min: "1", class: "form-control", placeholder: "lot" %>
         </div>
       </div>
       <div class="form-group">
         <%= f.label "購入価格", class: "col-sm-4 control-label"  %>
         <div class="col-sm-8">
-          <%= f.number_field :buy_price, min: "1", class: " form-control" %>
+          <%= f.number_field :buy_price, min: "1", class: "form-control", placeholder: "buy_price" %>
         </div>
       </div>
       <div class="form-group">
         <%= f.label "購入理由", class: "col-sm-4 control-label"  %>
         <div class="col-sm-8">
-          <%= f.text_field :buy_reason, class: " form-control" %>
+          <%= f.text_field :buy_reason, class: "form-control", placeholder: "buy_reason" %>
         </div>
       </div>
       <!-- <div class="form-group"> -->
@@ -49,13 +49,13 @@
       <div class="form-group">
         <%= f.label "売却価格（予定）", class: "col-sm-4 control-label"  %>
         <div class="col-sm-8">
-          <%= f.number_field :sell_price, min: "1", class: " form-control" %>
+          <%= f.number_field :sell_price, min: "1", class: "form-control", placeholder: "sell_price" %>
         </div>
       </div>
       <div class="form-group">
         <%= f.label "比率売却価格（％）", class: "col-sm-4 control-label"  %>
         <div class="col-sm-8">
-          <%= f.number_field :sell_percent, min: "1", class: " form-control" %>
+          <%= f.number_field :sell_percent, min: "1", class: "form-control", placeholder: "sell_percent" %>
         </div>
       </div>
       <!-- <div class="form-group"> -->
@@ -67,7 +67,7 @@
       <div class="form-group">
         <%= f.label "売却理由", class: "col-sm-4 control-label"  %>
         <div class="col-sm-8">
-          <%= f.text_field :sell_reason, class: " form-control" %>
+          <%= f.text_field :sell_reason, class: "form-control", placeholder: "sell_reason" %>
         </div>
       </div>
       <div class="form-group">

@@ -1,5 +1,5 @@
 class Position < ActiveRecord::Base
-  validates :buy_reason, :sell_reason, presence: true
+  validates :lot, :buy_price, :buy_reason, :sell_price, :sell_percent ,:sell_reason, presence: true
   # validates :buy_reason, :sell_reason, length: { in: 1..240 }
 
   belongs_to :user

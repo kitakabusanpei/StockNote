@@ -1,5 +1,5 @@
 class Selection < ActiveRecord::Base
-  validates :buy_selection, presence: true
+  validates :selection_order, :buy_selection, :terget_price, presence: true
 
   belongs_to :user
   belongs_to :stack
