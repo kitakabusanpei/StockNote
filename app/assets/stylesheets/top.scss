@@ -4,7 +4,41 @@
 
 
 header {
-  height: 88px;
+  width: 100%;
+  background-color: #0d61a9;
+  height: 54px;
+}
+
+.navbar-header .navbar-brand  {
+  color: white;
+}
+.navbar-default {
+background-color: #0d61a9;
+border-color: #0d61a9;
+}
+
+.navbar-default .navbar-nav > li > a {
+color: #ffffff;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+color: gray;
+background-color: transparent;
+}
+
+
+.drop_menu {
+  background-color: #0d61a9;
+  z-index: 1000;
+}
+.drop_menu ul {
+  background-color: #0d61a9;
+  z-index: 1000;
+}
+.drop_menu li {
+  background-color: #0d61a9;
+  z-index: 1000;
 }
 
 body {
@@ -30,11 +64,6 @@ html {
 
 li {
   list-style: none;
-}
-
-.title {
-  font-size: 26px;
-  text-align: center;
 }
 
 .top_list {
@@ -94,9 +123,9 @@ li {
 }
 
 .flash {
- color: white;
  padding-top: 10px;
  margin: 0px;
+ text-align: center;
 }
 
 .main-header {
@@ -114,6 +143,6 @@ li {
  padding-top: 15%;
 }
 
-// .area_padding{
-//   margin: 10px;
-// }
+.top_text {
+  margin: 10px;
+}
