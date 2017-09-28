@@ -38,7 +38,11 @@
                     <% @stacks.each do |stack| %>
                       <% if stack.code == position.position_code(position.name).to_i %>
                         <td class="text-center"><%= stack.stock_price %>円</td>
-                        <td class="text-center"><%= (stack.stock_price - position.buy_price) * position.lot %>円</td>
+                        <% if (stack.stock_price - position.buy_price) * position.lot > 0%>
+                          <td class="text-center text-info"><%= (stack.stock_price - position.buy_price) * position.lot %>円</td>
+                        <% else %>
+                          <td class="text-center text-danger"><%= (stack.stock_price - position.buy_price) * position.lot %>円</td>
+                        <% end %>
                       <% end %>
                     <% end %>
                     <td class="text-right"><%= link_to "詳細確認", position_path(position.id), class: "btn btn-primary btn-sm" %></td>
@@ -55,7 +59,7 @@
   </div>
 
     <div class="row">
-      <div class="col-xs-offset-1 col-xs-9">
+      <div class="col-xs-offset-2 col-xs-8">
         <div class="thumbnail">
           <h3>全保有株の比率（投資金額）</h3>
           <div class="pie_chrat">

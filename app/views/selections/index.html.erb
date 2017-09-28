@@ -17,7 +17,7 @@
                 <th class="text-center">候補順位</th>
                 <th class="text-center">証券コード</th>
                 <th class="text-center">銘柄</th>
-                <th class="text-center">購入株価</th>
+                <th class="text-center">購入予定株価</th>
                 <th class="text-center">株価</th>
               </tr>
             </thead>
@@ -32,7 +32,11 @@
                   <td class="text-center"><%= selection.terget_price %>円</td>
                   <% @stacks.each do |stack| %>
                     <% if stack.code == selection.selection_code(selection.name).to_i %>
-                      <td class="text-center"><%= stack.stock_price %>円</td>
+                      <% if stack.stock_price < selection.terget_price %>
+                        <td class="text-center success"><%= stack.stock_price %>円</td>
+                      <% else %>
+                        <td class="text-center"><%= stack.stock_price %>円</td>
+                      <% end %>
                     <% end %>
                   <% end %>
                 </tr>
@@ -49,10 +53,10 @@
               </tbody>
               <% end %>
               <% end %>
-
           </table>
         </div>
       </div>
+      <p class="help-block">※購入予定株価より株価が下回れば緑色になります。</p>
     </div>
   </div>
 </div>

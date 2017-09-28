@@ -27,10 +27,14 @@
                   <td class="text-center"><%= @position.buy_price %>円</td>
                   <% @stacks.each do |stack| %>
                     <% if stack.code == @position.position_code(@position.name).to_i %>
-                    <td class="text-center"><%= stack.stock_price %>円</td>
-                    <td class="text-center"><%= (stack.stock_price - @position.buy_price) * @position.lot %>円</td>
+                      <td class="text-center"><%= stack.stock_price %>円</td>
+                      <% if (stack.stock_price - @position.buy_price) * @position.lot > 0 %>
+                        <td class="text-center text-info "><%= (stack.stock_price - @position.buy_price) * @position.lot %>円</td>
+                      <% else %>
+                        <td class="text-center text-danger"><%= (stack.stock_price - @position.buy_price) * @position.lot %>円</td>
+                      <% end %>
+                    <% end %>
                   <% end %>
-                <% end %>
                 </tr>
                 <tr>
                   <td colspan="4">取引理由<br>
@@ -39,26 +43,35 @@
                 </tr>
                 <!-- <p>取引理由（画像）：<%= @position.buy_image %></p> -->
                 <tr>
-                  <td class="text-center">目標売却価格</td>
-                  <td class="text-center">目標売却差分</td>
-                  <td class="text-center">目標上昇比率（％）</td>
-                  <td class="text-center">比率売却差分</td>
+                  <td class="text-center table_center">目標売却価格</td>
+                  <td class="text-center table_center">目標売却差分</td>
+                  <td class="text-center">目標上昇比率<br>（売却株価）</td>
+                  <td class="text-center table_center">比率売却差分</td>
                   <!-- <td>（購入後の）最高値後からの騰落％<%= @position.high_price_per %></td> -->
                 </tr>
                 <tr>
                   <% @stacks.each do |stack| %>
                     <% if stack.code == @position.position_code(@position.name).to_i %>
-                  <td class="text-center"><%= @position.sell_price %>円</td>
-                  <td class="text-center"><%= stack.stock_price - @position.sell_price %>円</td>
-                  <td class="text-center"><%= @position.sell_percent %>％（<%= (@position.buy_price * ((100 + @position.sell_percent.round(2)) / 100)).to_i %>円）</td>
-                  <td class="text-center"><%= stack.stock_price - (@position.buy_price * ((100 + @position.sell_percent.round(2)) / 100)).to_i %>円</td>
+                      <td class="text-center table_center"><%= @position.sell_price %>円</td>
+                      <% if stack.stock_price - @position.sell_price > 0 %>
+                        <td class="text-center info"><%= stack.stock_price - @position.sell_price %>円<br>目標達成!!</td>
+                      <% else %>
+                        <td class="text-center"><%= stack.stock_price - @position.sell_price %>円<br>上昇待ち</td>
+                      <% end %>
+                      <td class="text-center"><%= @position.sell_percent %>％<br>（<%= (@position.buy_price * ((100 + @position.sell_percent.round(2)) / 100)).to_i %>円）</td>
+                      <% if stack.stock_price - (@position.buy_price * ((100 + @position.sell_percent.round(2)) / 100)).to_i > 0 %>
+                        <td class="text-center info"><%= stack.stock_price - (@position.buy_price * ((100 + @position.sell_percent.round(2)) / 100)).to_i %>円<br>目標達成!!</td>
+                      <% else %>
+                        <td class="text-center"><%= stack.stock_price - (@position.buy_price * ((100 + @position.sell_percent.round(2)) / 100)).to_i %>円<br>上昇待ち</td>
+                      <% end %>
+                    <% end %>
                   <% end %>
-                <% end %>
-              </tr>
-              <tr>
-                <td colspan="4">売却理由<br>
-                  <%= @position.sell_reason %>
-                </td>
+                </tr>
+                <tr>
+                  <td colspan="4">売却理由<br>
+                    <%= @position.sell_reason %>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
