@@ -21,8 +21,7 @@
                 <th class="text-center">株価</th>
               </tr>
             </thead>
-              <% @selections.each do |selection| %>
-              <% if selection.user_id == current_user.id %>
+            <% current_user.selections.each do |selection| %>
               <tbody>
                 <tr>
                   <th scope="row"></th>
@@ -51,8 +50,7 @@
                     <%= link_to "削除", selection_path(selection.id), class: "btn btn-danger btn-sm", method: :delete, data: { confirm: "本当に削除してよろしいですか？" } %></td>
                 </tr>
               </tbody>
-              <% end %>
-              <% end %>
+            <% end %>
           </table>
         </div>
       </div>

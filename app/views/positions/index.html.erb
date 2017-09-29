@@ -4,12 +4,7 @@
     <div class="col-xs-12">
       <p class="text-center"><%= notice %></p>
       <div class="line_header">
-        <% @users.each do |user| %>
-          <% if user.id == current_user.id %>
-            <h3><%= user.name %>さんのポートフォリオ</h3>
-            <% break %>
-          <% end %>
-        <% end %>
+        <h3><%= current_user.name %>さんのポートフォリオ</h3>
       </div>
       <div class="thumbnail position_table">
         <p><%= link_to "新規の株式取引を記録をする", new_position_path, class: "btn btn-primary position_add" %></p>
@@ -28,28 +23,26 @@
               </tr>
             </thead>
             <tbody>
-              <% @positions.each do |position| %>
-                <% if position.user_id == current_user.id%>
-                  <tr>
-                    <td class="text-center"><%= position.position_code(position.name) %></td>
-                    <td class="text-center"><%= position.position_company(position.name) %></td>
-                    <td class="text-center"><%= position.lot %>株</td>
-                    <td class="text-center"><%= position.buy_price %>円</td>
-                    <% @stacks.each do |stack| %>
-                      <% if stack.code == position.position_code(position.name).to_i %>
-                        <td class="text-center"><%= stack.stock_price %>円</td>
-                        <% if (stack.stock_price - position.buy_price) * position.lot > 0%>
-                          <td class="text-center text-info"><%= (stack.stock_price - position.buy_price) * position.lot %>円</td>
-                        <% else %>
-                          <td class="text-center text-danger"><%= (stack.stock_price - position.buy_price) * position.lot %>円</td>
-                        <% end %>
+              <% current_user.positions.each do |position| %>
+                <tr>
+                  <td class="text-center"><%= position.position_code(position.name) %></td>
+                  <td class="text-center"><%= position.position_company(position.name) %></td>
+                  <td class="text-center"><%= position.lot %>株</td>
+                  <td class="text-center"><%= position.buy_price %>円</td>
+                  <% @stacks.each do |stack| %>
+                    <% if stack.code == position.position_code(position.name).to_i %>
+                      <td class="text-center"><%= stack.stock_price %>円</td>
+                      <% if (stack.stock_price - position.buy_price) * position.lot > 0 %>
+                        <td class="text-center text-info"><%= (stack.stock_price - position.buy_price) * position.lot %>円</td>
+                      <% else %>
+                        <td class="text-center text-danger"><%= (stack.stock_price - position.buy_price) * position.lot %>円</td>
                       <% end %>
                     <% end %>
-                    <td class="text-right"><%= link_to "詳細確認", position_path(position.id), class: "btn btn-primary btn-sm" %></td>
-                    <td class="text-right"><%= link_to "変更", edit_position_path(position.id), class: "btn btn-success btn-sm"%></td>
-                    <td class="text-right"><%= link_to "削除", position_path(position.id), class: "btn btn-danger btn-sm", method: :delete, data: { confirm: "本当に削除してよろしいですか？" } %></td>
-                  </tr>
-                <% end %>
+                  <% end %>
+                  <td class="text-right"><%= link_to "詳細確認", position_path(position.id), class: "btn btn-primary btn-sm" %></td>
+                  <td class="text-right"><%= link_to "変更", edit_position_path(position.id), class: "btn btn-success btn-sm"%></td>
+                  <td class="text-right"><%= link_to "削除", position_path(position.id), class: "btn btn-danger btn-sm", method: :delete, data: { confirm: "本当に削除してよろしいですか？" } %></td>
+                </tr>
               <% end %>
             </tbody>
           </table>
@@ -58,52 +51,46 @@
     </div>
   </div>
 
-    <div class="row">
-      <div class="col-xs-offset-2 col-xs-8">
-        <div class="thumbnail">
-          <h3>全保有株の比率（投資金額）</h3>
-          <div class="pie_chrat">
-            <!-- ここに円グラフを表示 -->
-            <canvas id="myPieChart" width="300" height="300"></canvas>
-          </div>
-          <%= javascript_tag do %>
-            var pieLabels = [
-              <% @positions.each do |position| %>
-              <% if position.user_id == current_user.id%>
-                '<%= "#{position.position_company(position.name)}" %>',
-              <% end %>
-              <% end %>
-            ];
-            var pieColors =
-            <%= raw(color(@positions.size)) %>
-            ;
-            var date = [
-              <% @positions.each do |position| %>
-              <% if position.user_id == current_user.id%>
-                <%= "#{position.buy_price * position.lot}," %>
-              <% end %>
-              <% end %>
-            ];
-          <% end %>
-
-          <%= javascript_tag do %>
-            (window.onload = function(){
-              var ctx = document.getElementById("myPieChart").getContext("2d");
-              window.pieData = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                  labels: pieLabels,
-                  datasets: [{
-                    backgroundColor: pieColors,
-                    data: date,
-                  }]
-                }
-              });
-            })();
-
-          <% end %>
+  <div class="row">
+    <div class="col-xs-offset-2 col-xs-8">
+      <div class="thumbnail">
+        <h3>全保有株の比率（投資金額）</h3>
+        <div class="pie_chrat">
+          <!-- ここに円グラフを表示 -->
+          <canvas id="myPieChart" width="300" height="300"></canvas>
         </div>
+        <%= javascript_tag do %>
+          var pieLabels = [
+            <% current_user.positions.each do |position| %>
+              '<%= "#{position.position_company(position.name)}" %>',
+            <% end %>
+          ];
+          var pieColors =
+          <%= raw(color(@positions.size)) %>
+          ;
+          var date = [
+            <% current_user.positions.each do |position| %>
+              <%= "#{position.buy_price * position.lot}," %>
+            <% end %>
+          ];
+        <% end %>
+
+        <%= javascript_tag do %>
+          (window.onload = function(){
+            var ctx = document.getElementById("myPieChart").getContext("2d");
+            window.pieData = new Chart(ctx, {
+              type: 'pie',
+              data: {
+                labels: pieLabels,
+                datasets: [{
+                  backgroundColor: pieColors,
+                  data: date,
+                }]
+              }
+            });
+          })();
+        <% end %>
       </div>
     </div>
-
+  </div>
 </div>
