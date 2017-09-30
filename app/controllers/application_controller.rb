@@ -14,4 +14,13 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: PERMISSIBLE_ATTRIBUTES)
   end
 
+  # bom 日本語化 send_csv 使う場合
+  def send_csv(csv, options = {})
+    bom = "   "
+    bom.setbyte(0, 0xEF)
+    bom.setbyte(1, 0xBB)
+    bom.setbyte(2, 0xBF)
+    send_data bom + csv.to_s, options
+  end
+
 end

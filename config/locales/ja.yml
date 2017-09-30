@@ -1,6 +1,18 @@
 ---
 ja:
   activerecord:
+    attributes:
+      position:
+        lot: 株数
+        buy_price: 購入価格
+        buy_reason: 購入理由
+        sell_price: 売却価格
+        sell_percent: 比率売却価格
+        sell_reason: 売却理由
+      selection:
+        selection_order: 優先順位
+        buy_selection: 選定理由
+        terget_price: 購入価格
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"

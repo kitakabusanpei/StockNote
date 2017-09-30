@@ -5,6 +5,12 @@ class SelectionsController < ApplicationController
     @selections = Selection.all.order(:selection_order)
     @stacks = Stack.all
     @users = User.all
+    @selection_csv = current_user.selections.order(:selection_order)
+    # CSV出力
+    respond_to do |format|
+      format.html
+      format.csv {send_data @selection_csv.to_csv}
+    end
   end
 
   def new

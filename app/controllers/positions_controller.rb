@@ -5,6 +5,12 @@ class PositionsController < ApplicationController
     @positions = Position.all
     @stacks = Stack.all
     @users = User.all
+    @position_csv = current_user.positions
+    # CSV出力
+    respond_to do |format|
+      format.html
+      format.csv {send_data @position_csv.to_csv}
+    end
   end
 
   def new

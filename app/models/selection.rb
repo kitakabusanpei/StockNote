@@ -14,4 +14,21 @@ class Selection < ActiveRecord::Base
     stack_company.slice(4..14)
   end
 
+  def self.to_csv
+    CSV.generate do |csv|
+      csv << csv_column_selections
+      all.each do |selection|
+        csv << selection.csv_column_value_selections
+      end
+    end
+  end
+
+  def self.csv_column_selections
+    ["順位", "企業", "希望値", "買い理由"]
+  end
+
+  def csv_column_value_selections
+    [selection_order, name, terget_price, buy_selection]
+  end
+
 end

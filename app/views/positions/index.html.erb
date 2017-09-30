@@ -51,6 +51,17 @@
     </div>
   </div>
 
+  <!-- CSVダウンロード -->
+  <div class="row">
+    <div class="col-xs-12">
+      <div class=" text-right csv_button">
+        <p><b>ポジションをダウンロードする<b>　
+          <a><%= link_to 'CSVダウンロード', positions_path(format: :csv), class: "btn btn-default" %></a>
+        </p>
+      </div>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-xs-offset-2 col-xs-8">
       <div class="thumbnail">
