@@ -24,7 +24,7 @@ class Selection < ActiveRecord::Base
   end
 
   def self.csv_column_selections
-    ["順位", "企業", "希望値", "買い理由"]
+    ["順位", "企業", "希望株価", "買い理由"]
   end
 
   def csv_column_value_selections

@@ -30,7 +30,7 @@ class Position < ActiveRecord::Base
   end
 
   def self.csv_column_positions
-    ["企業", "株数", "買値", "買い理由", "売り価格", "売り理由"]
+    ["企業", "株数", "買値", "買い理由", "売却価格希望", "売却理由"]
   end
 
   def csv_column_value_positions

@@ -52,7 +52,7 @@
             </div>
           <% end %>
 
-          <div class="field text-center">
+          <div class="field text-center img_my_avater">
             <%= profile_img(@user) if profile_img(@user) %>
             <%= f.file_field :avatar, class: "col-sm-offset-4 col-sm-8" %>
             <%= f.hidden_field :avatar_cache, class: "col-sm-offset-4 col-sm-8" %><br>
