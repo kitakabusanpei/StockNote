@@ -16,14 +16,8 @@ class Position < ActiveRecord::Base
 
   def self.to_csv
     CSV.generate do |csv|
-      # csv_column_positions はカラム名を配列で返す
       csv << csv_column_positions
       all.each do |position|
-        # attributes はカラム名と値のハッシュを返す
-        # valudes_at はハッシュから引数で指定したキーに対応する値を取り出し、配列にして返す
-        # column_namesで指定したvalue値の配列を返す
-        # csv << customer.attributes.values_at(*column_names)
-        # 指定したいので変更
         csv << position.csv_column_value_positions
       end
     end
@@ -35,6 +29,11 @@ class Position < ActiveRecord::Base
 
   def csv_column_value_positions
     [name, lot, buy_price, buy_reason, sell_price, sell_reason]
+  end
+
+  # 未使用
+  def price_calcultion(stock_price, buy_price, lot)
+    (stock_price - buy_price) * lot
   end
 
 end
