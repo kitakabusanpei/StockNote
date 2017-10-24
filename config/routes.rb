@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   devise_for :users, controllers: {
@@ -8,6 +7,7 @@ Rails.application.routes.draw do
   }
   resources :positions, only: [:index, :new, :create, :edit, :show, :update, :destroy]
   resources :selections, only: [:index, :new, :create, :edit, :update, :destroy]
+  resources :companies, only: [:index]
 
   resources :contacts, only: [:new, :create] do
     collection do
