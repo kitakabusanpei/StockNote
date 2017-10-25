@@ -1,3 +1,85 @@
-<% stacks.each do |stack| %>
-  <%= stack.company %>
-<% end %>
+<% provide(:title, "｜ 上場企業一覧")%>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <p class="text-center"><%= notice %></p>
+      <div class="line_header">
+        <h3>企業一覧</h3>
+      </div>
+      <p><%= page_entries_info @companies_lines %></p>
+      <p><%= paginate @companies_lines%></p>
+      <div class="thumbnail position_table">
+        <div class="alt_table_responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th class="text-center">証券コード</th>
+                <th class="text-center">会社名</th>
+                <th class="text-center">市場</th>
+                <th class="text-center">業種</th>
+                <th class="text-center">株価</th>
+                <th class="text-center">時価総額</th>
+                <th class="text-center">発行株式数</th>
+                <th class="text-center">EPS</th>
+                <th class="text-center">BPR</th>
+                <th class="text-center">配当金</th>
+                <th class="text-center">PER</th>
+                <th class="text-center">適正株価(PER)</th>
+                <th class="text-center">業種別PER</th>
+                <th class="text-center">適正株価(業種別PER)</th>
+                <th class="text-center">PBR</th>
+                <th class="text-center">ROA</th>
+                <th class="text-center">ROE</th>
+                <th class="text-center">PSR</th>
+                <th class="text-center">PCFR</th>
+                <th class="text-center">PEGレシオ</th>
+                <th class="text-center">期待収益率</th>
+                <th class="text-center">配当性向</th>
+                <th class="text-center">ミックス係数</th>
+                <th class="text-center">優待内容(簡略)</th>
+                <th class="text-center">優待権利日</th>
+                <th class="text-center">長期間優待</th>
+                <th class="text-center">優待金額</th>
+                <th class="text-center">優待最低単元数</th>
+                <th class="text-center">url</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-center"><%=  %></td>
+                <td class="text-center"><%=  %></td>
+                <td class="text-center"><%=  %></td>
+                <td class="text-center"><%=  %></td>
+                <td class="text-center"><%=  %></td>
+                <td class="text-center"><%=  %></td>
+                <td class="text-center"><%=  %></td>
+                <td class="text-center"><%=  %></td>
+                <td class="text-center"><%=  %></td>
+                <td class="text-center"><%=  %></td>
+                <td class="text-center"><%=  %></td>
+                <td class="text-center"><%=  %></td>
+                <td class="text-center"><%=  %></td>
+                <td class="text-center"><%=  %></td>
+                <td class="text-center"><%=  %></td>
+                <td class="text-center"><%=  %></td>
+                <td class="text-center"><%=  %></td>
+                <td class="text-center"><%=  %></td>
+                <td class="text-center"><%=  %></td>
+                <td class="text-center"><%=  %></td>
+                <td class="text-center"><%=  %></td>
+                <td class="text-center"><%=  %></td>
+                <td class="text-center"><%=  %></td>
+                <td class="text-center"><%=  %></td>
+                <td class="text-center"><%=  %></td>
+                <td class="text-center"><%=  %></td>
+                <td class="text-center"><%=  %></td>
+                <td class="text-center"><%=  %></td>
+                <td class="text-center"><%=  %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

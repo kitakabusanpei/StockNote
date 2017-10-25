@@ -1,3 +1,14 @@
 // Place all the styles related to the companies controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.alt_table_responsive {
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: auto;
+  -ms-overflow-style: -ms-autohdden-scrollbar;
+  -webkit-overflow-scrolling: touch;
+  th {
+    white-space: nowrap;
+  }
+}

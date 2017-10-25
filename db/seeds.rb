@@ -6,6 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+=begin
 n = 1
 while n <= 20
   if n == 1
@@ -35,4 +36,18 @@ while n <= 20
                    user_id: 1
                    )
   n = n + 1
+end
+=end
+
+require "csv"
+
+CSV.foreach('db/company.csv', headers: true) do |row|
+  Company.create(:code => row[0],
+                 :company => row[1],
+                 :yutai_simple => row[2],
+                 :yutai => row[3],
+                 :month_before => row[4],
+                 :month_rear => row[5],
+                 :money => row[6],
+                 :share_unit => row[7])
 end
