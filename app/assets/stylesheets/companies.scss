@@ -2,13 +2,15 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// 項目が多い、表示画面が大きい等でシークバーが出なくなることを解消
 .alt_table_responsive {
   width: 100%;
   overflow-y: hidden;
   overflow-x: auto;
   -ms-overflow-style: -ms-autohdden-scrollbar;
   -webkit-overflow-scrolling: touch;
-  th {
+  // 日本語だと文字が折り返され無いようにする
+  th, td {
     white-space: nowrap;
   }
 }

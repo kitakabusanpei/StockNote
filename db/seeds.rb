@@ -48,6 +48,7 @@ CSV.foreach('db/company.csv', headers: true) do |row|
                  :yutai => row[3],
                  :month_before => row[4],
                  :month_rear => row[5],
-                 :money => row[6],
-                 :share_unit => row[7])
+                 :long_term => row[6],
+                 :money => row[7],
+                 :share_unit => row[8])
 end
