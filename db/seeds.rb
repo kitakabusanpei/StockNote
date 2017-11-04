@@ -40,7 +40,7 @@ end
 =end
 
 require "csv"
-
+# 優待 初期データ用
 CSV.foreach('db/company.csv', headers: true) do |row|
   Company.create(:code => row[0],
                  :company => row[1],
@@ -52,3 +52,19 @@ CSV.foreach('db/company.csv', headers: true) do |row|
                  :money => row[7],
                  :share_unit => row[8])
 end
+
+# "-"がどこかに含まれているため、正規表現しておくこと
+# 株価 初期データ用
+# CSV.foreach('db/dayStack.csv', headers: true) do |row|
+#   Stack.create(:code => row[0],
+#                :company => row[1],
+#                :market => row[2],
+#                :sector => row[3],
+#                :market_price => row[4],
+#                :issued_stocks => row[5],
+#                :stock_price => row[6],
+#                :dividend => row[7],
+#                :industry_per => row[8],
+#                :eps => row[9],
+#                :bps => row[10])
+# end

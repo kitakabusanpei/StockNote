@@ -1,17 +1,16 @@
 class CompaniesController < ApplicationController
+  before_action :authenticate_user!
   def index
+    # @companies = Company.all.order(:code)
     # kaminari
     @companies = Company.page(params[:page]).order(:code)
-    # @companies = Company.all.order(:code)
-    @stacks = Stack.all
-    # テーブルの結合と要素の重複削除
-    # @mix_data = @companies.concat(@stacks).uniq!
+    @stacks = Stack.all.order(:code)
   end
 
   def new
   end
 
-  def create
+  def updates
   end
 
   def show

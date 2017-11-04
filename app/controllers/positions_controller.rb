@@ -3,7 +3,7 @@ class PositionsController < ApplicationController
   before_action :set_position, only: [:edit, :show, :update, :destroy]
   def index
     @positions = Position.all
-    @stacks = Stack.all
+    @stacks = Stack.all.order(:code)
     @users = User.all
     @position_csv = current_user.positions
     # CSV出力

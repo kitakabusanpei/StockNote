@@ -13,7 +13,7 @@
           <table class="table table-hover">
             <thead>
               <tr>
-                <!-- 表示、非表示設定作成予定 -->
+                <!-- 現在の非表示は財務表作成後、表示予定 -->
                 <th class="text-center table_center">証券コード</th>
                 <th class="text-center table_center">会社名</th>
                 <th class="text-center table_center">市場</th>
@@ -39,13 +39,13 @@
                 <th class="text-center table_center">配当性向</th>
                 <th class="text-center table_center">ミックス係数</th>
                 <th class="text-center table_center">優待内容</th>
-                <th colspan="2" class="text-center table_center">優待権利日</th>
+                <th class="text-center table_center" colspan="2" >優待権利日</th>
                 <th class="text-center table_center">長期間優待</th>
                 <th class="text-center table_center">優待金額</th>
                 <th class="text-center table_center">優待利回り</th>
                 <th class="text-center table_center">総合利回り</th>
                 <th class="text-center table_center">(最低)優待<br>単元数</th>
-                <!-- <th class="text-center table_center">会社HP</th> -->
+                <!-- <th class="text-center table_center">会社HP<br>IR情報</th> -->
               </tr>
             </thead>
             <tbody>
@@ -65,11 +65,7 @@
                       <td class="text-right"><%= stack.bps %></td><!-- BPS(API) 命名間違えた -->
                       <td class="text-right"><%= stack.dividend %></td><!-- 配当金(API) -->
                       <td class="text-right"><%= (stack.dividend / stack.stock_price * 100).round(2) %> ％</td><!-- 配当利回り (計算) -->
-                      <% if stack.eps != 0 %>
-                        <td class="text-right"><%= (stack.stock_price / stack.eps).round(2)  %></td><!-- PER (設定) -->
-                      <% else %>
-                        <td class="text-right">-</td>
-                      <% end %>
+                      <td class="text-right"><%= stack.eps == 0 ? "-" : (stack.stock_price / stack.eps).round(2)  %></td><!-- PER (設定) -->
                       <td class="text-right"><%= (stack.eps * company.set_per).to_i %></td><!-- 適正株価 (計算) -->
                       <td class="text-right"><%= stack.industry_per %></td><!-- 業種別PER(API) -->
                       <td class="text-right"><%= (stack.eps * stack.industry_per).to_i %></td><!-- 適正株価(業種別PER) (計算) -->
@@ -80,32 +76,25 @@
                       <!-- <td class="text-right"><%=  %></td> --><!-- PCFR (計算:株価/(営業キャッシュフロー/発行株式数)) -->
                       <!-- <td class="text-right"><%=  %></td> --><!-- PEGレシオ (計算:PER/営業利益や経常利益の成長率) -->
                       <td class="text-right"><%= (stack.eps / stack.stock_price * 100).round(2) %> ％</td><!-- 期待収益率 (計算) -->
-                      <% if stack.eps != 0 %>
-                        <td class="text-right"><%= (stack.dividend / stack.eps * 100).to_i %> ％</td><!-- 配当性向 (計算) -->
-                        <td class="text-right"><%= (stack.stock_price / stack.bps * stack.stock_price / stack.eps).round(2) %></td><!-- ミックス係数 (計算) -->
-                      <% else %>
-                        <td class="text-right">-</td>
-                        <td class="text-right">-</td>
-                      <% end %>
+                      <td class="text-right"><%= stack.eps == 0 ? "-" : (stack.dividend / stack.eps * 100).to_i %> ％</td><!-- 配当性向 (計算) -->
+                      <td class="text-right"><%= stack.eps == 0 ? "-" : (stack.stock_price / stack.bps * stack.stock_price / stack.eps).round(2) %></td><!-- ミックス係数 (計算) -->
                     <% end %>
                   <% end %>
                   <td class="text-center"><%= company.yutai_simple == "0" ? "-" : company.yutai_simple %></td><!-- 優待内容(簡略) -->
+                  <!-- company.yutai 優待内容　モーダル作成位置 -->
                   <td class="text-center"><%= company.month_before == "0" ? "" : company.month_before %></td><!-- 優待権利日 -->
                   <td class="text-center"><%= company.month_rear == "0" ? "" : company.month_rear %></td><!-- 優待権利日 -->
-                  <td class="text-center"><%= company.long_term == true ? "有" : "-" %></td><!-- 長期間優待 -->
+                  <td class="text-center"><%= company.long_term == true ? "◯" : "-" %></td><!-- 長期間優待 -->
                   <td class="text-right"><%= company.yutai_simple == "0" ? "-" : "#{company.money} 円" %></td><!-- 優待金額 -->
                   <% @stacks.each do |stack| %>
                     <% if company.code == stack.code %>
                       <td class="text-right"><%= company.yutai_simple == "0" ? "-" : "#{(company.money / (stack.stock_price * company.share_unit).to_f * 100).round(2)} ％" %></td><!-- 優待利回り (計算) -->
-                      <% if stack.dividend.to_i != 0 %>
-                        <td class="text-right"><%= (stack.dividend / stack.stock_price * 100 + company.money / (stack.stock_price * company.share_unit).to_f * 100).round(2) %> ％</td><!-- 総合利回り (計算) -->
-                      <% else %>
-                        <td class="text-right"><%= (company.money / (stack.stock_price * company.share_unit) * 100).round(2) %> ％</td>
-                      <% end %>
+                      <td class="text-right"><%= stack.dividend.to_i == 0 ? (company.money / (stack.stock_price * company.share_unit) * 100).round(2) :
+                       (stack.dividend / stack.stock_price * 100 + company.money / (stack.stock_price * company.share_unit).to_f * 100).round(2) %> ％</td><!-- 総合利回り (計算) -->
                     <% end %>
                   <% end %>
                   <td class="text-right"><%= company.yutai_simple == "0" ? "-" : "#{company.share_unit} 株" %></td><!-- 優待最低単元数 -->
-                  <!-- <td class="text-center"><%#= link_to "会社HP_IR", company.site, :target=>["_blank"] %></td> --><!-- 会社HPのIR（別タブ） -->
+                  <!-- <td class="text-center"><%#= link_to "IR情報を見る", company.site, :target=>["_blank"] %></td> --><!-- 会社HPのIR（別タブ） -->
                 </tr>
               <% end %>
             </tbody>
