@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   }
   resources :positions, only: [:index, :new, :create, :edit, :show, :update, :destroy]
   resources :selections, only: [:index, :new, :create, :edit, :update, :destroy]
-  resources :companies, only: [:index]
+  resources :companies, only: [:index, :show]
 
   resources :contacts, only: [:new, :create] do
     collection do

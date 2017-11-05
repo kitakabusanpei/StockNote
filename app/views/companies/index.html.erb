@@ -6,7 +6,7 @@
       <div class="line_header">
         <h3>企業一覧</h3>
       </div>
-      <p><%= page_entries_info @companies %></p>
+
       <p><%= paginate @companies %></p>
       <div class="thumbnail position_table">
         <div class="alt_table_responsive">
@@ -69,9 +69,9 @@
                       <td class="text-right"><%= (stack.eps * company.set_per).to_i %></td><!-- 適正株価 (計算) -->
                       <td class="text-right"><%= stack.industry_per %></td><!-- 業種別PER(API) -->
                       <td class="text-right"><%= (stack.eps * stack.industry_per).to_i %></td><!-- 適正株価(業種別PER) (計算) -->
-                      <td class="text-right"><%= stack.bps ? "0" : (stack.stock_price / stack.bps).round(2) %></td><!-- PBR (計算) -->
+                      <td class="text-right"><%= stack.bps == 0 ? "0" : (stack.stock_price / stack.bps).round(2) %></td><!-- PBR (計算) -->
                       <!-- <td class="text-right"><%=  %></td> --><!-- ROA (計算:純利益/総資本*100) -->
-                      <td class="text-right"><%= stack.bps ? "0" : (stack.eps / stack.bps * 100).round(2) %></td><!-- ROE (計算) -->
+                      <td class="text-right"><%= stack.bps == 0 ? "0" : (stack.eps / stack.bps * 100).round(2) %></td><!-- ROE (計算) -->
                       <!-- <td class="text-right"><%=  %></td> --><!-- PSR (計算:時価総額/売上高) -->
                       <!-- <td class="text-right"><%=  %></td> --><!-- PCFR (計算:株価/(営業キャッシュフロー/発行株式数)) -->
                       <!-- <td class="text-right"><%=  %></td> --><!-- PEGレシオ (計算:PER/営業利益や経常利益の成長率) -->
@@ -80,8 +80,11 @@
                       <td class="text-right"><%= stack.eps == 0 ? "-" : (stack.stock_price / stack.bps * stack.stock_price / stack.eps).round(2) %></td><!-- ミックス係数 (計算) -->
                     <% end %>
                   <% end %>
-                  <td class="text-center"><%= company.yutai_simple == "0" ? "-" : company.yutai_simple %></td><!-- 優待内容(簡略) -->
                   <!-- company.yutai 優待内容　モーダル作成位置 -->
+                  <td class="text-center"><%= company.yutai_simple == "0" ? "-" : company.yutai_simple %></td><!-- 優待内容(簡略) -->
+                  <!-- <td class="text-center"><%#= company.yutai_simple == "0" ? "-" : link_to company.month_before, company_path(company.id), remote: true %></td> --><!-- 優待内容(簡略) -->
+                  <!-- <div id="user-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div> -->
+                  <!-- ここまで -->
                   <td class="text-center"><%= company.month_before == "0" ? "" : company.month_before %></td><!-- 優待権利日 -->
                   <td class="text-center"><%= company.month_rear == "0" ? "" : company.month_rear %></td><!-- 優待権利日 -->
                   <td class="text-center"><%= company.long_term == true ? "◯" : "-" %></td><!-- 長期間優待 -->
@@ -101,6 +104,8 @@
           </table>
         </div>
       </div>
+      <!-- 下段のページネーション -->
+      <p><%= paginate @companies %></p>
     </div>
   </div>
 </div>
