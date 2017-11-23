@@ -3,7 +3,7 @@ class SelectionsController < ApplicationController
   before_action :set_selection, only: [:edit, :update, :destroy]
   def index
     @selections = Selection.all.order(:selection_order)
-    @stacks = Stack.all.order(:code)
+    @stacks = Stack.all
     @users = User.all
     @selection_csv = current_user.selections.order(:selection_order)
     # CSV出力

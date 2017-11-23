@@ -4,7 +4,7 @@ class CompaniesController < ApplicationController
     # @companies = Company.all.order(:code)
     # kaminari
     @companies = Company.page(params[:page]).order(:code)
-    @stacks = Stack.all.order(:code)
+    @stacks = Stack.all
   end
 
   def new
