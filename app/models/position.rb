@@ -14,6 +14,7 @@ class Position < ActiveRecord::Base
     stack_company.slice(5..15)
   end
 
+  # csvダウンロード用
   def self.to_csv
     CSV.generate do |csv|
       csv << csv_column_positions
@@ -23,15 +24,17 @@ class Position < ActiveRecord::Base
     end
   end
 
+  # csvのヘッダーの並び順
   def self.csv_column_positions
     ["企業", "株数", "買値", "買い理由", "売却価格希望", "売却理由"]
   end
 
+  # csvの並び順
   def csv_column_value_positions
     [name, lot, buy_price, buy_reason, sell_price, sell_reason]
   end
 
-  # 未使用
+  # 未使用 - APIデータだと使用不可？
   def price_calcultion(stock_price, buy_price, lot)
     (stock_price - buy_price) * lot
   end

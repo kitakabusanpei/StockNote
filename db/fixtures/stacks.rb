@@ -1,7 +1,8 @@
 ###########herokuのDBが10000件までなので一旦使用不可################
 # 更新用
 # "-"がどこかに含まれているため、正規表現しておくこと
-# コンソールで実行
+#
+# データ更新はコンソールで実行（herokuの場合）↓
 # heroku run ./bin/rake db:seed_fu
 
 # CSV.foreach('db/fixtures/dayStack.csv', headers: true) do |row|

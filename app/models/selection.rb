@@ -14,6 +14,7 @@ class Selection < ActiveRecord::Base
     stack_company.slice(4..14)
   end
 
+  # csvダウンロード用
   def self.to_csv
     CSV.generate do |csv|
       csv << csv_column_selections
@@ -23,10 +24,12 @@ class Selection < ActiveRecord::Base
     end
   end
 
+  # csvのヘッダーの並び順
   def self.csv_column_selections
     ["順位", "企業", "希望株価", "買い理由"]
   end
 
+  # csvの並び順
   def csv_column_value_selections
     [selection_order, name, terget_price, buy_selection]
   end
